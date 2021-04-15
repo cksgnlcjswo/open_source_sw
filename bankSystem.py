@@ -2,7 +2,7 @@
 Banking System version 1.3.0
 작성자 : 김찬휘
 이메일 : cksgnlcjswoo@naver.com
-버전 업 내용 : 이자율, 신용등급, 카드 종류 추가
+버전 업 내용 : 파일 분할 및 코드 수정
 """
 import account,normalAccount,highCreditAccount,accountHandler
 import enumClass
