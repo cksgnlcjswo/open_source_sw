@@ -8,6 +8,9 @@ description : highCreditAccount 클래스 선언이 명시되어있다.
 import normalAccount
 import account
 
+def switch(key):
+    return {9 : 'A', 7 : 'B',5 : 'C',
+            3 : 'D', 1 : 'E'}.get(key, "not_defined") #6은 정의되지 않은 값
 class HighLevelAccount(normalAccount.NormalAccount):
     def __init__(self,ID,money,name,rate,specialRate):
         super().__init__(ID,money,name,rate)
@@ -19,8 +22,12 @@ class HighLevelAccount(normalAccount.NormalAccount):
         return
 
     def showAccountInfo(self):
+        print("--------------------")
         print("special card")
+        level = switch(self.specialRate)
+        print("credit revel : ",level)
         print("bank account number:",self.ID)
         print("name:", self.name)
         print("balance:", self.balance)
+        print("--------------------")
         return

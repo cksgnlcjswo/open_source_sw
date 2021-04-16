@@ -18,8 +18,10 @@ class NormalAccount(account.Account):
         return
 
     def showAccountInfo(self):
+        print("--------------------")
         print("normal type card")
         print("bank account number:",self.ID)
         print("name:", self.name)
         print("balance:", self.balance)
+        print("--------------------")
         return

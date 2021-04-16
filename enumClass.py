@@ -17,11 +17,11 @@ class Action(Enum):
 
 # 선택 메뉴
 class Credit(Enum):
-    LEVEL_A = 1
-    LEVEL_B = 3
+    LEVEL_A = 9
+    LEVEL_B = 7
     LEVEL_C = 5
-    LEVEL_D = 7
-    LEVEL_E = 9
+    LEVEL_D = 3
+    LEVEL_E = 1
 
 # 계좌 종류
 class Card(Enum):
