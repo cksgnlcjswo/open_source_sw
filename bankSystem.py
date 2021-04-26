@@ -1,11 +1,19 @@
 """
-Banking System version 1.4.0
+Banking System version : 1.5.0
 작성자 : 김찬휘
 이메일 : cksgnlcjswoo@naver.com
-버전 업 내용 : 삭제 기능 추가
+description : main함수의 역할을 하며 계정 생성,삭제, 조회가 가능.
+수정 내용 : pythonic-way 적용
 """
+import sys
 import account,normalAccount,highCreditAccount,accountHandler
 import enumClass
+
+print("-----version information-----")
+print(sys.version_info)
+print(sys.version)
+print("-----------------------------")
+print()
 
 def switch(key:str) -> int:
     return {'1' : 1, '2' : 2,'3' : 3,

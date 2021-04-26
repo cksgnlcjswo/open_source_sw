@@ -43,19 +43,19 @@ class AccountHandler:
         print()
         print("making normal type card...")
         print("accout number : ",end='')
-        id = input()
+        _id = input()
         print("name : ",end='')
-        name = input()
+        _name = input()
         print("money : ",end='')
-        money = int(input())
+        _money = int(input())
         print("interate(0~10% 사이) : ",end='')
-        interate = int(input())
+        _interate = int(input())
         print()
 
         #잘못된 유저 아이디 형식
-        if False == self.checkValidAccount(id,name,money,interate): return
+        if False == self.checkValidAccount(_id,_name,_money,_interate): return
             
-        self.accList.append(normalAccount.NormalAccount(id,money,name,interate))
+        self.accList.append(normalAccount.NormalAccount(_id,_money,_name,_interate))
         self.accNum += 1
         return
 
@@ -76,7 +76,7 @@ class AccountHandler:
             return False
 
         #이율은 10%를 넘길 수 없다.
-        if interate > 11 and interate < 0 :
+        if interate >= 11 or interate < 0 :
             print("interate shoud be in 0~10%")
             return False
 
@@ -85,42 +85,42 @@ class AccountHandler:
     def makeCreditAccount(self):
         print("making credit card type...")
         print("accout number : ",end='')
-        id = input()
+        _id = input()
         print("name : ",end='')
-        name = input()
+        _name = input()
         print("money : ",end='')
-        money = int(input())
+        _money = int(input())
         print("interate(0~10% 사이) : ",end='')
-        interate = int(input())
+        _interate = int(input())
         print("credit level number(숫자로 입력하세요: Ato9, Bto7, Cto5, Dto3, Eto1) : ",end='')
-        level = int(input())
+        _level = int(input())
         print()
 
-        if False == self.checkValidAccount(id,name,money,interate): return
+        if False == self.checkValidAccount(_id,_name,_money,_interate): return
 
         #1등급
-        if level == enumClass.Credit.LEVEL_A.value:
-            self.accList.append(highCreditAccount.HighLevelAccount(id,money,name,interate,enumClass.Credit.LEVEL_A.value))
+        if _level == enumClass.Credit.LEVEL_A.value:
+            self.accList.append(highCreditAccount.HighLevelAccount(_id,_money,_name,_interate,enumClass.Credit.LEVEL_A.value))
             self.accNum += 1
 
         #2등급
-        elif level == enumClass.Credit.LEVEL_B.value:
-            self.accList.append(highCreditAccount.HighLevelAccount(id,money,name,interate,enumClass.Credit.LEVEL_B.value))
+        elif _level == enumClass.Credit.LEVEL_B.value:
+            self.accList.append(highCreditAccount.HighLevelAccount(_id,_money,_name,_interate,enumClass.Credit.LEVEL_B.value))
             self.accNum += 1
 
         #3등급
-        elif level == enumClass.Credit.LEVEL_C.value:
-            self.accList.append(highCreditAccount.HighLevelAccount(id,money,name,interate,enumClass.Credit.LEVEL_C.value))
+        elif _level == enumClass.Credit.LEVEL_C.value:
+            self.accList.append(highCreditAccount.HighLevelAccount(_id,_money,_name,_interate,enumClass.Credit.LEVEL_C.value))
             self.accNum += 1
 
         #4등급
-        elif level == enumClass.Credit.LEVEL_D.value:
-            self.accList.append(highCreditAccount.HighLevelAccount(id,money,name,interate,enumClass.Credit.LEVEL_D.value))
+        elif _level == enumClass.Credit.LEVEL_D.value:
+            self.accList.append(highCreditAccount.HighLevelAccount(_id,_money,_name,_interate,enumClass.Credit.LEVEL_D.value))
             self.accNum += 1
         
         #5등급
         else :
-            self.accList.append(highCreditAccount.HighLevelAccount(id,money,name,interate,enumClass.Credit.LEVEL_E.value))
+            self.accList.append(highCreditAccount.HighLevelAccount(_id,_money,_name,_interate,enumClass.Credit.LEVEL_E.value))
             self.accNum += 1
 
         return
@@ -128,13 +128,13 @@ class AccountHandler:
     def depositMoney(self):
         print("[deposit money]")
         print("account number :",end='')
-        id = input()
+        _id = input()
         print("how many :",end='')
-        money = int(input())
+        _money = int(input())
 
         for i in range(0,self.accNum):
-            if(self.accList[i].getID() == id):
-                self.accList[i].deposit(money)
+            if(self.accList[i].getID() == _id):
+                self.accList[i].deposit(_money)
                 print("deposit successed!")
                 return
 
@@ -144,13 +144,13 @@ class AccountHandler:
     def withdrawMoney(self):
         print("[withdraw money]")
         print("account number:",end='')
-        id = input()
+        _id = input()
         print("how much money you want to withdraw:",end='')
-        money = int(input())
+        _money = int(input())
 
         for i in range(0,self.accNum):
-            if(self.accList[i].getID() == id):
-                if(self.accList[i].withdraw(money) == 0): 
+            if(self.accList[i].getID() == _id):
+                if(self.accList[i].withdraw(_money) == 0): 
                     print("no money left")
                     return
 
@@ -162,24 +162,36 @@ class AccountHandler:
     def showAllAccountInfo(self):
         if self.accNum == 0:
             print("no information of any account number... please create id...")
-        for i, acc in enumerate(self.accList,1):
-            print()
-            print("user {}.".format(i))
-            acc.showAccountInfo()
-            print()
-        return    
+        
+        print("you want to see money decreasing order?(Yes or y / No or n):",end='')
+        ans = input()
+
+        if ans == 'y':
+            tmp = self.accList[:]
+            tmp.sort(key = lambda x: x.balance, reverse=True)
+            for i, acc in enumerate(tmp,1):
+                print("user {}.".format(i))
+                acc.showAccountInfo()
+                print() 
+        else :
+            for i, acc in enumerate(self.accList,1):
+                print("user {}.".format(i))
+                acc.showAccountInfo()
+                print()    
+            return    
 
     def removeAccount(self):
         if self.accNum == 0:
             print("there is no account information, please create id....")
             print()
             return
+
         print("[remove account]")
         print("account number:",end='')
-        id = input()
+        _id = input()
 
         for i in range(0,self.accNum):
-            if(self.accList[i].getID() == id):
+            if(self.accList[i].getID() == _id):
                 self.accList.pop(i)
                 self.accNum -= 1 
                 print("{} account deleted!".format(id))
@@ -189,7 +201,7 @@ class AccountHandler:
         return
 
     def __del__(self):
-        for i in range(0,self.accNum):
+        for _ in range(0,self.accNum):
             self.accList.pop()
         return
 
