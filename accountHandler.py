@@ -169,7 +169,11 @@ class AccountHandler:
         if ans == 'y':
             tmp = self.accList[:]
             tmp.sort(key = lambda x: x.balance, reverse=True)
-            for i, acc in enumerate(tmp,1):
+            vip, *list = tmp #vip는 돈이 가장 많은 사람.
+            print("VIP memver")
+            vip.showAccountInfo()
+            print()
+            for i, acc in enumerate(list,2):
                 print("user {}.".format(i))
                 acc.showAccountInfo()
                 print() 

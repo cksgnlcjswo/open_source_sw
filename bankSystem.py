@@ -17,7 +17,7 @@ print()
 
 def switch(key:str) -> int:
     return {'1' : 1, '2' : 2,'3' : 3,
-            '4' : 4, '5' : 5,'6' : 6}.get(key, 7) #6은 정의되지 않은 값
+            '4' : 4, '5' : 5,'6' : 6}.get(key, 7) #7은 정의되지 않은 값
 
 handler = accountHandler.AccountHandler()
 
@@ -38,6 +38,5 @@ while True:
         handler.removeAccount()    
     elif act == enumClass.Action.EXIT.value:
         break 
-    
     else:
         print("Illegal selection... choose anothoer option!") 
