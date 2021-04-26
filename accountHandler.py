@@ -1,5 +1,5 @@
 """
-version 1.3.2
+version 1.4.0
 작성자 : 김찬휘
 이메일 : cksgnlcjswoo@naver.com
 description : accountHandler 클래스 선언이 명시되어있다.
@@ -19,10 +19,12 @@ class AccountHandler:
         print("2. deposit")
         print("3. withdraw")
         print("4. show all account information")
-        print("5. program exit")     
+        print("5. remove account")
+        print("6. program exit")     
         return
     
     def makeAccount(self):
+        print()
         print("[making bank account]")
         print("choose card type.")
         print("1. normal type     2. credit card")
@@ -37,6 +39,7 @@ class AccountHandler:
         return
     
     def makeNormalAccount(self):
+        print()
         print("making normal type card...")
         print("accout number : ",end='')
         id = input()
@@ -156,13 +159,36 @@ class AccountHandler:
         print("invalid account number")
 
     def showAllAccountInfo(self):
+        if self.accNum == 0:
+            print("no information of any account number... please create id...")
         for i in range(0,self.accNum):
+            print()
             print("user",i+1)
             self.accList[i].showAccountInfo()
             print()
         return    
 
+    def removeAccount(self):
+        if self.accNum == 0:
+            print("there is no account information, please create id....")
+            print()
+            return
+        print("[remove account]")
+        print("account number:",end='')
+        id = input()
+
+        for i in range(0,self.accNum):
+            if(self.accList[i].getID() == id):
+                self.accList.pop(i)
+                self.accNum -= 1 
+                print(id," account deleted!")
+                return
+
+        print("invalid account number")
+        return
+
     def __del__(self):
         for i in range(0,self.accNum):
             self.accList.pop()
         return
+

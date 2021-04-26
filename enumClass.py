@@ -13,7 +13,8 @@ class Action(Enum):
     DEPOSIT = 2
     WITHDRAW = 3
     INQUIRE = 4
-    EXIT = 5
+    REMOVE = 5
+    EXIT = 6
 
 # 선택 메뉴
 class Credit(Enum):
