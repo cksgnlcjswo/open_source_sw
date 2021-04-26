@@ -1,8 +1,9 @@
 """
-version 1.3.0
+version 1.5.0
 작성자 : 김찬휘
 이메일 : cksgnlcjswoo@naver.com
 description : enumClass 모음
+수정 내용 : REMOVE 추가
 """
 
 from enum import Enum

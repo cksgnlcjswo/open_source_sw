@@ -1,8 +1,9 @@
 """
-version 1.4.0
+version : 1.5.0
 작성자 : 김찬휘
 이메일 : cksgnlcjswoo@naver.com
-description : accountHandler 클래스 선언이 명시되어있다.
+description : accountHandler 클래스 
+수정사항: pythonic-way 적용
 """
 
 import normalAccount,highCreditAccount,account
@@ -58,7 +59,7 @@ class AccountHandler:
         self.accNum += 1
         return
 
-    def checkValidAccount(self,id,name,money,interate):
+    def checkValidAccount(self,id:str, name:str, money:int, interate:int) -> bool:
         #id가 입력되지 않은 경우
         if(len(id) == 0):
             print("id is not defined.")
@@ -161,10 +162,10 @@ class AccountHandler:
     def showAllAccountInfo(self):
         if self.accNum == 0:
             print("no information of any account number... please create id...")
-        for i in range(0,self.accNum):
+        for i, acc in enumerate(self.accList,1):
             print()
-            print("user",i+1)
-            self.accList[i].showAccountInfo()
+            print("user {}.".format(i))
+            acc.showAccountInfo()
             print()
         return    
 
@@ -181,7 +182,7 @@ class AccountHandler:
             if(self.accList[i].getID() == id):
                 self.accList.pop(i)
                 self.accNum -= 1 
-                print(id," account deleted!")
+                print("{} account deleted!".format(id))
                 return
 
         print("invalid account number")

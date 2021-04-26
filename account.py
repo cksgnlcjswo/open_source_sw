@@ -1,8 +1,9 @@
 """
-version 1.3.0
+version : 1.5.0
 작성자 : 김찬휘
 이메일 : cksgnlcjswoo@naver.com
-description : Account 클래스 선언이 명시되어있다.
+description : account 클래스 
+수정사항 : pythonic-way 적용
 """
 class Account:
     def __init__(self, ID, money, name):
@@ -24,7 +25,7 @@ class Account:
         return money        
 
     def showAccountInfo(self):
-        print("bank account number:"+self.ID)
-        print("name:" + self.name)
-        print("balance:",self.balance)
+        print("bank account number:{}".format(self.ID))
+        print("name:{}".format(self.name))
+        print("balance:{}".format(self.balance))
         return

@@ -7,7 +7,7 @@ Banking System version 1.4.0
 import account,normalAccount,highCreditAccount,accountHandler
 import enumClass
 
-def switch(key):
+def switch(key:str) -> int:
     return {'1' : 1, '2' : 2,'3' : 3,
             '4' : 4, '5' : 5,'6' : 6}.get(key, 7) #6은 정의되지 않은 값
 

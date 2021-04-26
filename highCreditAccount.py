@@ -1,8 +1,9 @@
 """
-version 1.3.0
+version : 1.5.0
 작성자 : 김찬휘
 이메일 : cksgnlcjswoo@naver.com
-description : highCreditAccount 클래스 선언이 명시되어있다.
+description : highCreditAccount 클래스(normalAccount class 자식 클래스).
+수정사항 pythonic-way 적용
 """
 
 import normalAccount
@@ -17,7 +18,7 @@ class HighLevelAccount(normalAccount.NormalAccount):
         super().__init__(ID,money,name,rate)
         self.specialRate = specialRate
 
-    def deposit(self,money):
+    def deposit(self,money:int):
         super().deposit(money)
         super().deposit(money * (self.specialRate/100.0)) #특별 이자
         return
@@ -31,9 +32,9 @@ class HighLevelAccount(normalAccount.NormalAccount):
             print("error!")
             return
             
-        print("credit revel : ",level)
-        print("bank account number:",self.ID)
-        print("name:", self.name)
-        print("balance:", self.balance)
+        print("credit revel : {}".format(level))
+        print("bank account number: {}".format(self.ID))
+        print("name: {}".format(self.name))
+        print("balance: {}".format(self.balance))
         print("--------------------")
         return
