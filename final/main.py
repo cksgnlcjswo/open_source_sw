@@ -1,30 +1,79 @@
-from csv import reader
-pos=[]
+import fileRead
+import draw
+import calMath
+import heapq
 
-def converToFlaot(row):
-  ret=[]
-  for tmp in row:
-    ret.append(float(tmp))
-  return ret
+pos=[] #위치좌표
+setList = [] #i번째 경찰서가 세워지면 커버되는 지역의 set
+radius = 1 #반지름
+heap = [] # 우선순위 큐
 
-# skip first line i.e. read header first and then iterate over each row od csv as a list
-with open('scp_data.csv', 'r') as read_obj:
-    csv_reader = reader(read_obj)
-    header = next(csv_reader)
-    # Check file as empty
-    if header != None:
-        # Iterate over each row after the header in the csv
-        for row in csv_reader:
-            # row variable is a list that represents a row in csv
-            coord = converToFlaot(row)
-            pos.append(coord)
-            
-#print(pos)
-#print(len(pos))
+pos = fileRead.loadData()
 
 #현재 점들의 위치 좌표 보여주기
-import matplotlib.pyplot as plt
+draw.drawCoord2D(pos)
 
-x, y = zip(*pos)
+for i in range(len(pos)) :
+  tmp = set() 
+  for j in range(len(pos)) :
+    if calMath.getCoveredCircleArea(pos[i],pos[j],radius) == True: #i점으로 부터 거리 r안에 j점이 들어옴. 
+      tmp.add(j)
+
+  setList.append(tmp)
+
+print("set 구성 완료")
+'''
+for s in setList:
+  heapq.heappush(heap, (-len(s), s))  # set의 개수가 큰 것부터 우선순위를 줄 것(그리디).
+
+res = list() # 경찰서를 설치했을 때 커버되는 곳의 set를 포함하는 list
+U = set() # 전체 집합을 나타냄
+
+for i in range(len(pos)) :
+  U.add(i)
+
+prevU = U
+
+"""U가 공집합이 되면 모든 곳을 다 커버했다는 의미"""
+while len(U) :
+    maxLenSet = heapq.heappop(heap)[1]
+    U = set.difference(U,maxLenSet)
+    
+    if(prevU != U):
+      res.append(maxLenSet)
+
+    prevU = U
+
+print(res)
+
+police=[] # 실제 pos의 인덱스를 담는 리스트
+'''
+
+'''setList의 원소와 res의 원소가 같은 지점이 우리가 얻고자 하는 지점의 좌표임'''
+'''
+for s in res:
+  for i,tmp in enumerate(setList):
+    if tmp == s :
+      police.append(pos[i])
+      break
+
+print(police)
+print(len(police))
+
+x, y = zip(*police)
 plt.scatter(x, y)
 plt.show()
+
+import matplotlib.pyplot as plt
+
+figure, axes = plt.subplots()
+
+plt.axis([-15,15,-15,15])
+for coord in police:
+  draw_circle = plt.Circle((coord[0], coord[1]), r, fill = False)
+  plt.gcf().gca().add_artist(draw_circle)
+
+plt.title('coverage of each result')
+axes.set_aspect(1)
+plt.show()
+'''
