@@ -1,3 +1,9 @@
+'''
+    description : 오픈 소스 기말 cover set problem
+    author : 김찬휘
+    e-mail : cksgnlcjswoo@naver.com
+'''
+
 import fileRead
 import draw
 import calMath

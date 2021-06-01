@@ -1,3 +1,9 @@
+'''
+    description : csv 파일 읽기 
+    author : 김찬휘
+    e-mail : cksgnlcjswoo@naver.com   
+'''
+
 from csv import reader
 
 def converToFlaot(row):

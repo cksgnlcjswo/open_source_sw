@@ -1,3 +1,10 @@
+'''
+    description : 두 점의 거리 게산 및 범위 표현 하는 함수 모음    
+    author : 김찬휘
+    e-mail : cksgnlcjswoo@naver.com
+'''
+
+
 from math import sqrt
 
 '''getDistance(pos[i],pos[j]) <= r*r 과 같이 쓸 때 사용'''
