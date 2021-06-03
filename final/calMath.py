@@ -4,7 +4,6 @@
     e-mail : cksgnlcjswoo@naver.com
 '''
 
-
 from math import sqrt
 
 '''getDistance(pos[i],pos[j]) <= r*r 과 같이 쓸 때 사용'''

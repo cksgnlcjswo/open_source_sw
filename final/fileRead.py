@@ -6,12 +6,14 @@
 
 from csv import reader
 
+'''행을 읽어와서 float형으로 cast'''
 def converToFlaot(row):
   ret=[]
   for tmp in row:
     ret.append(float(tmp))
   return ret
 
+'''csv파일에서 데이터 읽어오기. 첫번째 행은 X0,X1이므로 제외'''
 def loadData():
 # skip first line i.e. read header first and then iterate over each row od csv as a list
     pos = []
