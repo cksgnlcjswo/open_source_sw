@@ -33,7 +33,7 @@ def drawCircle2D(pos:list,police:list,r:int):
 
 def resultGraph(radius:list,selectedNumber:list):
     plt.plot(radius,selectedNumber)
-    plt.xlabel('radius')
+    plt.xlabel('length')
     plt.ylabel('number of selected Area')
     plt.title('result graph')
     plt.show()
