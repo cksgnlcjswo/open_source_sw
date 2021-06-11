@@ -28,3 +28,10 @@ def drawCircle2D(pos,police,r):
     plt.title('coverage of each result')
     axes.set_aspect(1)
     plt.show()
+
+def resultGraph(radius,selectedNumber):
+    plt.plot(radius,selectedNumber)
+    plt.xlabel('radius')
+    plt.ylabel('number of selected Area')
+    plt.title('result graph')
+    plt.show()

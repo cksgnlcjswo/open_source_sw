@@ -13,7 +13,7 @@ import sys
 
 pos=[] #위치좌표
 setList = [] #i번째 경찰서가 세워지면 커버되는 지역의 set
-radius = 5 #반지름
+radius = 5.1 #반지름
 heap = [] # 우선순위 큐
 
 #csv파일로부터 읽어오기
@@ -82,3 +82,66 @@ draw.drawCoord2D(police)
 
 #모든점을 포함하는지 그림으로 확인
 draw.drawCircle2D(pos,police,radius)
+
+
+''' 이번에는 반지름에 따른 선택 개수를 보려고함. '''
+
+radius = [ 0.3, 0.5, 0.8, 1.3, 1.9 , 2.5, 2.9, 3.4, 4.1, 4.7, 5.1]
+selectedNumber = [] #선택된 개수
+
+for r in radius: #모든 r에 대해서 실행
+  
+  heap = []
+  setList = []
+
+  for i in range(len(pos)) :
+    tmp = set() 
+    for j in range(len(pos)) :
+      if calMath.getCoveredCircleArea(pos[i],pos[j],r) == True: #i점으로 부터 거리 r안에 j점이 들어옴. 
+        tmp.add(j)
+
+    setList.append(tmp)
+
+
+  for s in setList:
+    heapq.heappush(heap, (-len(s), s))  # set의 개수가 큰 것부터 우선순위를 줄 것.
+
+  res = list() # 경찰서를 설치했을 때 커버되는 곳의 set를 포함하는 list
+  U = set() # 전체 집합(모든 점)을 나타냄
+
+  for i in range(len(pos)) :
+    U.add(i)
+
+  visited = [ False for _ in range(len(pos))] #모든 위치가 방문되었는지 확인할 용도
+  prevU = U
+
+  while len(U) != 0 :
+    maxLenSet = heapq.heappop(heap)[1]
+    U = set.difference(U,maxLenSet)
+  
+  #방문한 점은 true
+    for s in maxLenSet : 
+      visited[s] = True
+
+    if(prevU != U): #변화가 있었다면 결과에 넣음
+      res.append(maxLenSet)
+
+    prevU = U
+
+  '''모든점을 다 방문했는지?'''
+  if (Check.visitedAll(visited,len(pos))) :
+    print("now r is ",r,"and every area is coverd!")
+  else:
+    sys.exit("all areas are not coverd!")
+
+  police=[]
+
+  for s in res:
+    for i,tmp in enumerate(setList):
+      if tmp == s :
+        police.append(pos[i])
+        break    
+
+  selectedNumber.append(len(police))
+
+draw.resultGraph(radius,selectedNumber)
