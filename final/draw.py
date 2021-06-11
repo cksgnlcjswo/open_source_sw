@@ -1,18 +1,19 @@
 '''
-    description : 그래프 그리는 메소드 모음 
+    description : 그래프 그리는 함수 모음 
     author : 김찬휘
     e-mail : cksgnlcjswoo@naver.com   
 '''
 
 import matplotlib.pyplot as plt
 
-def drawCoord2D(pos):
+def drawCoord2D(pos:list):
     x, y = zip(*pos)
     plt.title("two-dimentional coordinate")
     plt.scatter(x, y)
     plt.show()
+    return
 
-def drawCircle2D(pos,police,r):
+def drawCircle2D(pos:list,police:list,r:int):
     figure, axes = plt.subplots()
 
     plt.axis([-15,15,-15,15])
@@ -28,10 +29,12 @@ def drawCircle2D(pos,police,r):
     plt.title('coverage of each result')
     axes.set_aspect(1)
     plt.show()
+    return
 
-def resultGraph(radius,selectedNumber):
+def resultGraph(radius:list,selectedNumber:list):
     plt.plot(radius,selectedNumber)
     plt.xlabel('radius')
     plt.ylabel('number of selected Area')
     plt.title('result graph')
     plt.show()
+    return

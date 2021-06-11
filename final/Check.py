@@ -5,7 +5,7 @@
 '''
 
 '''방문 안한 점이 1개라도 있을 시 False 리턴'''
-def visitedAll(visited,size):
+def visitedAll(visited:list,size:int) -> bool:
     for i in range(size):
         if visited[i] == False:
             print(i,"is not visited!")
